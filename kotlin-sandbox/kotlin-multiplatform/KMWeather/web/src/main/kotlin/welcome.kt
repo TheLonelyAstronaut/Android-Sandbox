@@ -8,7 +8,6 @@ import react.RState
 import styled.css
 import styled.styledDiv
 import styled.styledInput
-import com.thelonelyastronaut.kmweather.Bruh
 
 external interface WelcomeProps : RProps {
     var name: String
@@ -21,8 +20,6 @@ class Welcome(props: WelcomeProps) : RComponent<WelcomeProps, WelcomeState>(prop
 
     init {
         state = WelcomeState(props.name)
-        //console.log(Main().testDI())
-        //console.log(Bruh().meh())
     }
 
     override fun RBuilder.render() {

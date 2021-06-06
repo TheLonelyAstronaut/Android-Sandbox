@@ -4,9 +4,13 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0"
+val ktorVersion = "1.6.0"
+val sqlDelightVersion = "1.5.0"
+val kodeinVersion = "7.6.0"
 
 kotlin {
     android()
@@ -50,25 +54,37 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.kodein.di:kodein-di:7.6.0")
+                implementation("org.kodein.di:kodein-di:$kodeinVersion")
+
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
             }
         }
-        val commonTest by getting {
+        val androidMain by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
-        val androidMain by getting
-        val androidTest by getting {
+        val iosMain by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
-        val iosMain by getting
-        val iosTest by getting
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:sqljs-driver:$sqlDelightVersion")
+            }
+        }
     }
 }
 
