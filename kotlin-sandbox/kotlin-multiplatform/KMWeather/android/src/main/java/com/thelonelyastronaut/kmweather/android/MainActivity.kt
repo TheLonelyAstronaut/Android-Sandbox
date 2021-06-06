@@ -2,11 +2,11 @@ package com.thelonelyastronaut.kmweather.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.thelonelyastronaut.kmweather.Greeting
+import com.thelonelyastronaut.kmweather.KodeinMP
 import android.widget.TextView
 
 fun greet(): String {
-    return Greeting().greeting()
+    return KodeinMP().testDI()
 }
 
 class MainActivity : AppCompatActivity() {
