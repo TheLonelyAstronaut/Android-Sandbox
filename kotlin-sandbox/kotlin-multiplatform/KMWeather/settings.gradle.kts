@@ -2,8 +2,9 @@ pluginManagement {
     repositories {
         google()
         gradlePluginPortal()
-        //maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
+        maven { url = uri("https://dl.bintray.com/badoo/maven") }
+        maven { url = uri("https://maven.google.com") }
     }
 }
 

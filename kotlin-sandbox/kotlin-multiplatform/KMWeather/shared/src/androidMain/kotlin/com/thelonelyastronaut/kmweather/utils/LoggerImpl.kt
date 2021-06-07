@@ -2,7 +2,7 @@ package com.thelonelyastronaut.kmweather.utils
 
 import android.util.Log
 
-object Logger: ILogger {
+object LoggerImpl: Logger {
     private val TAG = "KMWEATHER_TAG"
 
     override fun log(data: Any) {

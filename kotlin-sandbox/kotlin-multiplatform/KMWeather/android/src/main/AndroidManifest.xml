@@ -3,6 +3,7 @@
     package="com.thelonelyastronaut.kmweather.android">
 
     <application
+        android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

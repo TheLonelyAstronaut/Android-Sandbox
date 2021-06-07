@@ -16,6 +16,7 @@ dependencies {
     testImplementation(kotlin("test-js"))
     implementation(kotlin("stdlib-js"))
     implementation("org.kodein.di:kodein-di:7.6.0")
+    implementation("com.badoo.reaktive:reaktive:1.1.22")
     implementation("org.jetbrains:kotlin-react:16.13.1-pre.113-kotlin-1.4.0")
     implementation("org.jetbrains:kotlin-react-dom:16.13.1-pre.113-kotlin-1.4.0")
     implementation("org.jetbrains:kotlin-styled:1.0.0-pre.113-kotlin-1.4.0")

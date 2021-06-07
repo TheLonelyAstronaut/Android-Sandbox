@@ -1,16 +1,22 @@
 import SwiftUI
 import shared
 
+let viewModel = DIContainerIOS().getWeatherForecastViewModel();
+
 struct ContentView: View {
-    let weather = DIContainerIOS().fetchWeather();
+    @State var text = "Well"
     
 	var body: some View {
-        Text(weather)
+        Text(text).onTapGesture (perform: {
+            viewModel.subscribe(observable: viewModel.forecast, onSubscribe: nil, onError: nil, onComplete: nil) { data in text = "done" }
+
+            viewModel.getWeatherByCityName(city: "Minsk")
+        })
 	}
 }
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-	ContentView()
+        ContentView()
 	}
 }

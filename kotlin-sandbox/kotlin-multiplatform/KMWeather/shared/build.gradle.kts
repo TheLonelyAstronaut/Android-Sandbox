@@ -5,12 +5,15 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    id("kotlinx-serialization")
 }
 
 version = "1.0"
-val ktorVersion = "1.6.0"
+val ktorVersion = "1.5.3"
 val sqlDelightVersion = "1.5.0"
 val kodeinVersion = "7.6.0"
+val mokoMvvmVersion = "0.10.1"
+val reactiveVersion = "1.1.22"
 
 kotlin {
     android()
@@ -56,6 +59,12 @@ kotlin {
             dependencies {
                 implementation("org.kodein.di:kodein-di:$kodeinVersion")
 
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+
+                implementation("com.badoo.reaktive:reaktive:$reactiveVersion")
+                implementation("com.badoo.reaktive:reaktive-annotations:$reactiveVersion")
+                implementation("com.badoo.reaktive:coroutines-interop:$reactiveVersion")
+
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-json:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
@@ -74,6 +83,8 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.2.1")
 
                 implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }

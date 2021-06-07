@@ -1,6 +1,6 @@
 package com.thelonelyastronaut.kmweather.utils
 
-object Logger: ILogger {
+object LoggerImpl: Logger {
     override fun log(data: Any) {
         console.log(data)
     }

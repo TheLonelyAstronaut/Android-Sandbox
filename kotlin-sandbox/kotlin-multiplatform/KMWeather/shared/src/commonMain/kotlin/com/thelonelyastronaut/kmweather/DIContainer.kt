@@ -1,11 +1,12 @@
 package com.thelonelyastronaut.kmweather
 
-import com.thelonelyastronaut.kmweather.repository.network.INetworkProvider
+import com.thelonelyastronaut.kmweather.domain.WeatherForecastViewModel
 import org.kodein.di.*
 
-class DIContainer(override val di: DI): DIAware {
-    private val api: INetworkProvider by instance<INetworkProvider>()
-
-    fun testDI() = api.fetchData()
+open class DIContainer(override val di: DI): DIAware {
+    fun getWeatherForecastViewModel(): WeatherForecastViewModel {
+        val viewModel: WeatherForecastViewModel by instance<WeatherForecastViewModel>()
+        return viewModel
+    }
 }
 

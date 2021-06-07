@@ -1,6 +1,6 @@
 package com.thelonelyastronaut.kmweather.utils
 
-interface ILogger {
+interface Logger {
     fun log(data: Any)
     fun error(data: Any)
 }

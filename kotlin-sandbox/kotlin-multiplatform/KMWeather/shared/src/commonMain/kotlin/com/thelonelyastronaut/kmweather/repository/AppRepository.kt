@@ -1,4 +1,4 @@
 package com.thelonelyastronaut.kmweather.repository
 
-class WeatherRepository {
+class AppRepository {
 }
