@@ -26,7 +26,7 @@ class WeatherForecastViewModelImpl(
 
         forecast = forecastSubject
             .threadLocal()
-            .debounce(300, mainScheduler)
+            //.debounce(300, mainScheduler)
             .doOnBeforeNext { loadingSubject.onNext(true)}
             .distinctUntilChanged()
             .flatMapSingle { request ->

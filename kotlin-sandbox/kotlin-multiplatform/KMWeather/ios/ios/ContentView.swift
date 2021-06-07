@@ -8,7 +8,7 @@ struct ContentView: View {
     
 	var body: some View {
         Text(text).onTapGesture (perform: {
-            viewModel.subscribe(observable: viewModel.forecast, onSubscribe: nil, onError: nil, onComplete: nil) { data in text = "done" }
+            viewModel.subscribe(observable: viewModel.forecast, onSubscribe: nil, onError: nil, onComplete: nil) { data in text = data.debugDescription }
 
             viewModel.getWeatherByCityName(city: "Minsk")
         })
