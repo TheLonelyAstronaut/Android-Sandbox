@@ -59,7 +59,7 @@ kotlin {
             dependencies {
                 implementation("org.kodein.di:kodein-di:$kodeinVersion")
 
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt")
 
                 implementation("com.badoo.reaktive:reaktive:$reactiveVersion")
                 implementation("com.badoo.reaktive:reaktive-annotations:$reactiveVersion")
@@ -95,6 +95,13 @@ kotlin {
 
                 implementation("com.squareup.sqldelight:sqljs-driver:$sqlDelightVersion")
             }
+        }
+    }
+
+    sqldelight {
+        database("WeatherDatabaseGenerated") {
+            packageName = "com.thelonelyastronaut.kmweather"
+            sourceFolders = listOf("sqldelight")
         }
     }
 }

@@ -5,6 +5,8 @@ buildscript {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url = uri("https://www.jetbrains.com/intellij-repository/releases") }
+        maven { url =uri("https://jetbrains.bintray.com/intellij-third-party-dependencies") }
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")

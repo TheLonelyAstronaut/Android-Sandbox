@@ -15,6 +15,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test-js"))
     implementation(kotlin("stdlib-js"))
+    implementation(npm("copy-webpack-plugin", "6.4.1"))
+    implementation(npm("crypto-browserify", "3.12.0"))
     implementation("org.kodein.di:kodein-di:7.6.0")
     implementation("com.badoo.reaktive:reaktive:1.1.22")
     implementation("org.jetbrains:kotlin-react:16.13.1-pre.113-kotlin-1.4.0")
@@ -44,4 +46,8 @@ kotlin {
             }
         }
     }
+}
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackCli.version = "3.3.12"
 }
