@@ -32,6 +32,6 @@ class WeatherAPIServiceImpl(
     }
 
     override fun getAPIEndpoint(city: String): String {
-        return "https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=${_count}&appid=${_apiKey}"
+        return "https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=${_count}&units=metric&appid=${_apiKey}"
     }
 }
