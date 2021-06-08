@@ -1,39 +1,56 @@
 package com.thelonelyastronaut.kmweather.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.thelonelyastronaut.kmweather.DIContainerAndroid
-import android.widget.TextView
+import com.thelonelyastronaut.kmweather.android.components.screens.WeatherScreen
+import com.thelonelyastronaut.kmweather.declarations.Weather
 import com.thelonelyastronaut.kmweather.presentation.WeatherForecastViewModel
 import com.thelonelyastronaut.kmweather.utils.database.appContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     private lateinit var viewModel: WeatherForecastViewModel
+    private var city = mutableStateOf("Minsk")
+    private var isLoading = mutableStateOf(false)
+    private var weather = mutableStateOf(listOf<Weather>())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val tv: TextView = findViewById(R.id.text_view)
 
         appContext = this.applicationContext
         viewModel = DIContainerAndroid.getWeatherForecastViewModel()
 
-        testKMMModule()
+        setupKMMModule()
+        search()
 
-        tv.text = "IS IT COMPILE?"
+        setContent {
+            WeatherScreen(
+                city = city,
+                weather = weather,
+                isLoading = isLoading
+            ) {
+                city.value = it
+                search()
+            }
+        }
     }
 
-    private fun testKMMModule() {
+    private fun setupKMMModule() {
         viewModel.subscribe(viewModel.forecast, onNext = {
-            Log.e("RESULT", it.toString())
+            weather.value = it
         })
 
         viewModel.subscribe(viewModel.isLoading, onNext = {
-            Log.e("LOADING", it.toString())
+            isLoading.value = it
         })
+    }
 
-        viewModel.getWeatherByCityName("Minsk")
+    private fun search() {
+        isLoading.value = true
+        viewModel.getWeatherByCityName(city.value)
     }
 }

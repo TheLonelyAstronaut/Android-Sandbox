@@ -10,25 +10,13 @@ fun main() {
 
     CoroutineScope(Dispatchers.Main).async {
         DIContainerJS.initDB()
-
-        val viewModel = DIContainerJS.getWeatherForecastViewModel()
-
-        viewModel.subscribe(viewModel.forecast, onNext = {
-            console.log("RESULT", it)
-        })
-
-        viewModel.subscribe(viewModel.isLoading, onNext = {
-            console.log("LOADING", it)
-        })
-
-        viewModel.getWeatherByCityName("Minsk")
     }
 
     window.onload = {
         render(document.getElementById("root")) {
-            child(Welcome::class) {
+            child(WeatherScreen::class) {
                 attrs {
-                    name = "Kotlin/JS"
+                    viewModel = DIContainerJS.getWeatherForecastViewModel()
                 }
             }
         }

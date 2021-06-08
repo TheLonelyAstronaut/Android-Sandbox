@@ -100,6 +100,7 @@ struct ContentView: View {
     
     func search(city: String) {
         self.city = city
+        isLoading = true
         
         viewModel.getWeatherByCityName(city: city)
     }
