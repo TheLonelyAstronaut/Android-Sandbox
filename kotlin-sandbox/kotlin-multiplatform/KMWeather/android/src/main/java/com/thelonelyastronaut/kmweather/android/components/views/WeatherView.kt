@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.thelonelyastronaut.kmweather.android.utils.getCurrentDate
 import com.thelonelyastronaut.kmweather.android.utils.getWeatherImageByID
 import com.thelonelyastronaut.kmweather.declarations.Weather
 import compose.icons.AllIcons
@@ -17,7 +18,7 @@ import compose.icons.weathericons.Cloud
 import compose.icons.weathericons.Hot
 
 @Composable
-fun WeatherView(weather: Weather) {
+fun WeatherView(weather: Weather, index: Int) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +41,7 @@ fun WeatherView(weather: Weather) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Tuesday")
+                Text(getCurrentDate(shift = index))
                 Text("${weather.temperature.max} °C")
             }
         }

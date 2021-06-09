@@ -8,6 +8,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
+    maven { url = uri("https://dl.bintray.com/subroh0508/maven") }
     maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
     maven(url = "https://plugins.gradle.org/m2/")
 }
@@ -17,6 +18,7 @@ dependencies {
     implementation(kotlin("stdlib-js"))
     implementation(npm("copy-webpack-plugin", "6.4.1"))
     implementation(npm("crypto-browserify", "3.12.0"))
+    implementation(npm("@material-ui/core", "^4.9.14"))
     implementation("org.kodein.di:kodein-di:7.6.0")
     implementation("com.badoo.reaktive:reaktive:1.1.22")
     implementation("org.jetbrains:kotlin-react:16.13.1-pre.113-kotlin-1.4.0")
@@ -31,7 +33,9 @@ dependencies {
 kotlin {
     js(LEGACY) {
         browser {
+            useCommonJs()
             binaries.executable()
+
             webpackTask {
                 cssSupport.enabled = true
             }
@@ -45,6 +49,10 @@ kotlin {
                 }
             }
         }
+    }
+
+    sourceSets["main"].dependencies {
+        //implementation("com.ccfraser.muirwik:muirwik-components:0.7.0")
     }
 }
 

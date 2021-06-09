@@ -1,5 +1,6 @@
 import com.thelonelyastronaut.kmweather.declarations.Weather
 import com.thelonelyastronaut.kmweather.presentation.WeatherForecastViewModel
+import components.WeatherTile
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
 import org.w3c.dom.HTMLInputElement
@@ -7,9 +8,11 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
+import react.dom.div
 import styled.css
 import styled.styledDiv
 import styled.styledInput
+import kotlin.js.Date
 
 external interface WeatherScreenProps : RProps {
     var viewModel: WeatherForecastViewModel
@@ -33,6 +36,7 @@ class WeatherScreen(props: WeatherScreenProps) :
         )
 
         props.viewModel.subscribe(props.viewModel.forecast) { weather ->
+            console.log(weather)
             setState({ WeatherScreenState(it.city, weather, it.isLoading) })
         }
 
@@ -42,31 +46,56 @@ class WeatherScreen(props: WeatherScreenProps) :
     }
 
     override fun componentDidMount() {
-        search()
+        search(state.city)
     }
 
-    fun search() {
-        props.viewModel.getWeatherByCityName(state.city)
+    private fun search(city: String) {
+        setState({ WeatherScreenState(it.city, it.weatherList, true) })
+        props.viewModel.getWeatherByCityName(city)
     }
 
     override fun RBuilder.render() {
         styledDiv {
             css {
-                +WelcomeStyles.textContainer
+                +WeatherStyles.backgroundComponent
             }
-            +"Hello, ${state.name}"
-        }
-        styledInput {
-            css {
-                +WelcomeStyles.textInput
+            styledInput {
+                css {
+                    +WeatherStyles.textInput
+                }
+                attrs {
+                    type = InputType.text
+                    value = state.city
+                    onChangeFunction = { event ->
+                        val value = (event.target as HTMLInputElement).value
+
+                        setState({
+                            WeatherScreenState(value, it.weatherList, true)
+                        })
+
+                        search(value)
+                    }
+                }
+
             }
-            attrs {
-                type = InputType.text
-                value = state.name
-                onChangeFunction = { event ->
-                    setState(
-                        WelcomeState(name = (event.target as HTMLInputElement).value)
-                    )
+            styledDiv {
+                css {
+                    +WeatherStyles.weatherContainer
+                }
+
+                if(state.isLoading) {
+                    div("loader") {
+
+                    }
+                } else {
+                    state.weatherList.map {
+                        child(WeatherTile::class) {
+                            attrs {
+                                weather = it
+                                index = state.weatherList.indexOf(it)
+                            }
+                        }
+                    }
                 }
             }
         }

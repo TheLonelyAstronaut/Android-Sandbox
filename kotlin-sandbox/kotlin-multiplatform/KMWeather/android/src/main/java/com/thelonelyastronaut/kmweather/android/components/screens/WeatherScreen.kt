@@ -37,7 +37,10 @@ fun WeatherScreen(
                 } else {
                     LazyColumn {
                         items(weather.value) {
-                            WeatherView(weather = it)
+                            WeatherView(
+                                weather = it,
+                                index = weather.value.indexOf(it)
+                            )
                         }
                     }
                 }
